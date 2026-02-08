@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Мой квест</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <section class="phone">
+        <header class="status">
+          <span>09:41</span>
+          <span class="dots">●●●</span>
+        </header>
+
+        <section class="screen" id="screen">
+          <div class="home" id="home">
+            <h1>Квест для тебя</h1>
+            <p>Открой все иконки по порядку. Каждая это часть того, что я хочу сказать.</p>
+            <div class="grid" id="grid"></div>
+          </div>
+
+          <div class="app hidden" id="app">
+            <button class="back" id="back">← Назад</button>
+            <div class="app-content" id="appContent"></div>
+          </div>
+        </section>
+
+        <footer class="dock">
+          <div class="pill"></div>
+        </footer>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
