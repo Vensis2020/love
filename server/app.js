@@ -1,20 +1,22 @@
-// server/app.js
+// Add web token authorization for API calls to MEXC
 const express = require('express');
-const axios = require('axios');
+const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-const MEXC_API_URL = 'https://api.mexc.com';
 
-app.get('/trade', async (req, res) => {
+// Middleware for token verification
+app.use((req, res, next) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) return res.status(401).send('Access Denied.');
     try {
-        const response = await axios.get(`${MEXC_API_URL}/some-endpoint`);
-        res.json(response.data);
-    } catch (error) {
-        res.status(500).send('Error fetching data from MEXC API');
+        const verified = jwt.verify(token, 'your_secret_key'); // replace with your secret key
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(400).send('Invalid Token.');
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Your existing routes here...
+
+module.exports = app;
